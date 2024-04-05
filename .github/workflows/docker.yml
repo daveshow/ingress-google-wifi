@@ -49,7 +49,7 @@ jobs:
       #     password: ${{ secrets.QUAY_ROBOT_TOKEN }}
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: |
             # docker.io/${{ github.repository }}
