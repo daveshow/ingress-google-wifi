@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from scapy.all import send,IP,ICMP
-import time
-import os
+from scapy.all import send,IP,TCP
+from time import sleep
+from os import environ
 
-hostip = os.environ['HOST_IP']
-destip = os.environ['DEST_IP']
+hostip = environ['HOST_IP']
+destip = environ['DEST_IP']
 
 print("Container started")
 while True:
-	send(IP(src=hostip, dst=destip)/ICMP())
+	send(IP(src=hostip, dst=destip)/TCP(dport=80,flags="S"))
 	print("Sent from", hostip, "to", destip,"sleep 2.5 mins")
-	time.sleep(150)
+	sleep(150)
