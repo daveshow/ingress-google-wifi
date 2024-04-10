@@ -50,7 +50,7 @@ while True:
         fake_mac,
         "sleep 2.5 mins",
     )
-    sendp(ans)
+    send(ans)
     sleep(150)
 
 # while True:
