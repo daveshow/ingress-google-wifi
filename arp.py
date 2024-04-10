@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from scapy.all import send, IP, TCP, Ether, sendp, UDP, DNSQR, DNS, RandShort
+from scapy.all import send, IP, TCP, Ether, sendp, UDP, DNSQR, DNS, RandShort,sr1
 from time import sleep
 from os import environ
 from fcntl import ioctl
@@ -50,7 +50,7 @@ while True:
         fake_mac,
         "sleep 2.5 mins",
     )
-    send(ans)
+    sr1(ans,timeout=1)
     sleep(150)
 
 # while True:
