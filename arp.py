@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from scapy.all import send, IP, TCP, Ether, sendp, UDP
+from scapy.all import send, IP, TCP, Ether, sendp, UDP, DNSQR, DNS, RandShort
 from time import sleep
 from os import environ
 from fcntl import ioctl
@@ -32,6 +32,7 @@ MX:2\r\n\r\n"""
 print("Container started")
 
 while True:
+    ans = IP(dst=SSDPserver,src=spoofedIPsrc)/UDP(sport=RandShort(), dport=53)/DNS(rd=1,qd=DNSQR(qname="www.google.com",qtype="A"))
     ssdpRequest = (
         Ether(src=fake_mac, dst="ff:ff:ff:ff:ff:ff")
         / IP(src=spoofedIPsrc, dst=SSDPserver)
@@ -39,7 +40,7 @@ while True:
         / payload
     )
     print("Sent from", spoofedIPsrc, "to", SSDPserver, "ethernet address", fake_mac, "sleep 2.5 mins")
-    sendp(ssdpRequest)
+    sendp(ans)
     sleep(150)
 
 # while True:
